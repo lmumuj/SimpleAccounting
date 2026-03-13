@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
-    # 允许手动触发构建
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -29,7 +31,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
@@ -39,7 +41,7 @@ jobs:
         retention-days: 30
 
     - name: Build Release APK (unsigned)
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease --stacktrace
 
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
@@ -50,11 +52,5 @@ jobs:
 
     - name: Create Build Summary
       run: |
-        echo "## 📱 构建完成！" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### APK 文件已生成" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "- **Debug APK**: 用于测试，体积较大，代码未混淆" >> $GITHUB_STEP_SUMMARY
-        echo "- **Release APK**: 用于发布，体积小，代码已混淆（未签名）" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "请在页面下方的 Artifacts 部分下载 APK 文件" >> $GITHUB_STEP_SUMMARY
+        echo "## Build Complete!" >> $GITHUB_STEP_SUMMARY
+        echo "APK files are available in the Artifacts section below." >> $GITHUB_STEP_SUMMARY
