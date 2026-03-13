@@ -10,10 +10,17 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TransactionRepository
 
-    val allTransactions: StateFlow<List<Transaction>> = MutableStateFlow(emptyList())
-    val filteredTransactions: StateFlow<List<Transaction>> = MutableStateFlow(emptyList())
-    val monthlyExpense: StateFlow<Double> = MutableStateFlow(0.0)
-    val monthlyIncome: StateFlow<Double> = MutableStateFlow(0.0)
+    private val _allTransactions = MutableStateFlow<List<Transaction>>(emptyList())
+    val allTransactions: StateFlow<List<Transaction>> = _allTransactions.asStateFlow()
+
+    private val _filteredTransactions = MutableStateFlow<List<Transaction>>(emptyList())
+    val filteredTransactions: StateFlow<List<Transaction>> = _filteredTransactions.asStateFlow()
+
+    private val _monthlyExpense = MutableStateFlow(0.0)
+    val monthlyExpense: StateFlow<Double> = _monthlyExpense.asStateFlow()
+
+    private val _monthlyIncome = MutableStateFlow(0.0)
+    val monthlyIncome: StateFlow<Double> = _monthlyIncome.asStateFlow()
 
     private val _filterType = MutableStateFlow<FilterType>(FilterType.ALL)
     val filterType: StateFlow<FilterType> = _filterType.asStateFlow()
@@ -28,12 +35,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun loadTransactions() {
         viewModelScope.launch {
             repository.getAllTransactions().collect { transactions ->
-                allTransactions.value = transactions
+                _allTransactions.value = transactions
                 applyFilter()
 
                 // Calculate monthly totals
-                monthlyExpense.value = repository.getMonthlyTotalByType(TransactionType.EXPENSE) ?: 0.0
-                monthlyIncome.value = repository.getMonthlyTotalByType(TransactionType.INCOME) ?: 0.0
+                _monthlyExpense.value = repository.getMonthlyTotalByType(TransactionType.EXPENSE) ?: 0.0
+                _monthlyIncome.value = repository.getMonthlyTotalByType(TransactionType.INCOME) ?: 0.0
             }
         }
     }
@@ -45,10 +52,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun applyFilter() {
         val type = _filterType.value
-        filteredTransactions.value = when (type) {
-            FilterType.ALL -> allTransactions.value
-            FilterType.EXPENSE -> allTransactions.value.filter { it.type == TransactionType.EXPENSE }
-            FilterType.INCOME -> allTransactions.value.filter { it.type == TransactionType.INCOME }
+        _filteredTransactions.value = when (type) {
+            FilterType.ALL -> _allTransactions.value
+            FilterType.EXPENSE -> _allTransactions.value.filter { it.type == TransactionType.EXPENSE }
+            FilterType.INCOME -> _allTransactions.value.filter { it.type == TransactionType.INCOME }
         }
     }
 

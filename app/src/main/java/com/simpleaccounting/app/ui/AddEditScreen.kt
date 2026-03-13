@@ -2,6 +2,7 @@ package com.simpleaccounting.app.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +34,7 @@ fun AddEditScreen(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     var type by remember { mutableStateOf(TransactionType.EXPENSE) }
     var amount by remember { mutableStateOf("") }
     var selectedCategoryId by remember { mutableStateOf(1L) }
@@ -42,15 +45,14 @@ fun AddEditScreen(
     // Load transaction if editing
     LaunchedEffect(transactionId) {
         transactionId?.let {
-            existingTransaction = viewModel.viewModelScope.launch {
-                viewModel.getTransactionById(it)?.let { transaction ->
-                    type = transaction.type
-                    amount = transaction.amount.toString()
-                    selectedCategoryId = transaction.categoryId
-                    remark = transaction.remark
-                    selectedDate = transaction.date
-                }
-            }.let { }
+            viewModel.getTransactionById(it)?.let { transaction ->
+                existingTransaction = transaction
+                type = transaction.type
+                amount = transaction.amount.toString()
+                selectedCategoryId = transaction.categoryId
+                remark = transaction.remark
+                selectedDate = transaction.date
+            }
         }
     }
 
@@ -247,15 +249,13 @@ fun AddEditScreen(
                         createTime = existingTransaction?.createTime ?: System.currentTimeMillis()
                     )
 
-                    viewModel.viewModelScope.launch {
-                        if (transactionId == null) {
-                            viewModel.insertTransaction(transaction)
-                        } else {
-                            viewModel.updateTransaction(transaction)
-                        }
-                        Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show()
-                        onNavigateBack()
+                    if (transactionId == null) {
+                        viewModel.insertTransaction(transaction)
+                    } else {
+                        viewModel.updateTransaction(transaction)
                     }
+                    Toast.makeText(context, "保存成功", Toast.LENGTH_SHORT).show()
+                    onNavigateBack()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
