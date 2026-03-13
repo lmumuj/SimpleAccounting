@@ -1,0 +1,51 @@
+<view class="container">
+  <!-- 顶部概览卡片 -->
+  <view class="overview-card">
+    <view class="overview-item">
+      <text class="overview-label">本月支出</text>
+      <text class="overview-value expense">¥{{monthExpense}}</text>
+    </view>
+    <view class="divider"></view>
+    <view class="overview-item">
+      <text class="overview-label">本月收入</text>
+      <text class="overview-value income">¥{{monthIncome}}</text>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+    <view class="filter-item {{currentTab === 'expense' ? 'active' : ''}}" bindtap="switchTab" data-tab="expense">支出</view>
+    <view class="filter-item {{currentTab === 'income' ? 'active' : ''}}" bindtap="switchTab" data-tab="income">收入</view>
+  </view>
+
+  <!-- 账目列表 -->
+  <view class="account-list">
+    <block wx:for="{{accountList}}" wx:key="id">
+      <view class="account-item" bindtap="viewDetail" data-id="{{item.id}}">
+        <view class="account-left">
+          <view class="category-icon">{{item.categoryIcon}}</view>
+          <view class="account-info">
+            <text class="account-title">{{item.categoryName}}</text>
+            <text class="account-date">{{item.date}} {{item.time}}</text>
+          </view>
+        </view>
+        <view class="account-right">
+          <text class="account-amount {{item.type === 'expense' ? 'expense' : 'income'}}">{{item.type === 'expense' ? '-' : '+'}}{{item.amount}}</text>
+          <text class="account-remark">{{item.remark || ''}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{accountList.length === 0}}" class="empty-state">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">还没有记账记录</text>
+      <text class="empty-hint">点击右下角按钮开始记账</text>
+    </view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="goToAdd">
+    <text class="add-icon">+</text>
+  </view>
+</view>

@@ -1,0 +1,239 @@
+/* 时间选择 */
+.date-selector {
+  display: flex;
+  background: #F5F5F5;
+  border-radius: 16rpx;
+  padding: 8rpx;
+  margin: 20rpx;
+}
+
+.date-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+
+.date-item.active {
+  background: white;
+  color: #4A90E2;
+  font-weight: 500;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+}
+
+/* 总览卡片 */
+.summary-card {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin: 20rpx;
+  color: white;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.3);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30rpx;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.summary-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.summary-value {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.divider {
+  width: 2rpx;
+  height: 80rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.summary-balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.balance-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.balance-value {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.balance-value.positive {
+  color: #52C41A;
+}
+
+.balance-value.negative {
+  color: #FF5252;
+}
+
+/* 图表区域 */
+.chart-section {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+/* 饼图容器 */
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30rpx;
+}
+
+.pie-chart {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+
+.chart-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.chart-amount {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chart-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.empty-chart {
+  width: 200rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  border: 2rpx dashed #E0E0E0;
+  border-radius: 50%;
+}
+
+.empty-chart .empty-icon {
+  font-size: 60rpx;
+  opacity: 0.5;
+}
+
+.empty-chart .empty-text {
+  font-size: 24rpx;
+  color: #CCC;
+}
+
+/* 分类统计 */
+.category-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.category-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.stat-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex: 1;
+}
+
+.stat-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: white;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  flex: 1;
+}
+
+.stat-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.stat-percent {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.stat-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8rpx;
+  width: 180rpx;
+}
+
+.stat-amount {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.stat-bar {
+  width: 100%;
+  height: 8rpx;
+  background: #F0F0F0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}

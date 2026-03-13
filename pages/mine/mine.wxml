@@ -1,0 +1,69 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-avatar">
+      <text class="avatar-icon">👤</text>
+    </view>
+    <view class="user-info">
+      <text class="user-name">简单记账</text>
+      <text class="user-desc">记录每一笔开支</text>
+    </view>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats-grid">
+    <view class="stat-item">
+      <text class="stat-value">{{totalRecords}}</text>
+      <text class="stat-label">记账笔数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{totalDays}}</text>
+      <text class="stat-label">记账天数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{totalCategories}}</text>
+      <text class="stat-label">使用类别</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="exportData">
+      <view class="function-left">
+        <text class="function-icon">📤</text>
+        <text class="function-title">导出数据</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="function-item" bindtap="clearData">
+      <view class="function-left">
+        <text class="function-icon">🗑️</text>
+        <text class="function-title">清空数据</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <view class="function-item" bindtap="showAbout">
+      <view class="function-left">
+        <text class="function-icon">ℹ️</text>
+        <text class="function-title">关于我们</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-card">
+    <view class="tips-title">💡 使用提示</view>
+    <view class="tips-item">• 点击账目可查看详情或编辑</view>
+    <view class="tips-item">• 长按账目可快速删除</view>
+    <view class="tips-item">• 统计页面支持周/月/年切换</view>
+    <view class="tips-item">• 数据保存在本地，请定期备份</view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>版本 1.0.0</text>
+  </view>
+</view>

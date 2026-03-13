@@ -1,0 +1,188 @@
+/* 概览卡片 */
+.overview-card {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.3);
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.overview-value {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.divider {
+  width: 2rpx;
+  height: 80rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  background: white;
+  padding: 20rpx;
+  margin: 20rpx;
+  border-radius: 12rpx;
+  gap: 20rpx;
+}
+
+.filter-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx;
+  font-size: 28rpx;
+  color: #999;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.filter-item.active {
+  background: #4A90E2;
+  color: white;
+  font-weight: 500;
+}
+
+/* 账目列表 */
+.account-list {
+  padding: 0 20rpx;
+  padding-bottom: 120rpx;
+}
+
+.account-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+.account-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.category-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  background: #F0F5FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.account-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.account-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.account-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8rpx;
+}
+
+.account-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.account-amount.expense {
+  color: #FF5252;
+}
+
+.account-amount.income {
+  color: #52C41A;
+}
+
+.account-remark {
+  font-size: 24rpx;
+  color: #999;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  gap: 20rpx;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.empty-hint {
+  font-size: 24rpx;
+  color: #CCC;
+}
+
+/* 添加按钮 */
+.add-btn {
+  position: fixed;
+  bottom: 160rpx;
+  right: 40rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+  z-index: 100;
+}
+
+.add-icon {
+  font-size: 60rpx;
+  color: white;
+  line-height: 1;
+}

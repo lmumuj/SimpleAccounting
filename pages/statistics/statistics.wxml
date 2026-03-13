@@ -1,0 +1,101 @@
+<view class="container">
+  <!-- 时间选择 -->
+  <view class="date-selector">
+    <view class="date-item {{currentPeriod === 'week' ? 'active' : ''}}" bindtap="switchPeriod" data-period="week">本周</view>
+    <view class="date-item {{currentPeriod === 'month' ? 'active' : ''}}" bindtap="switchPeriod" data-period="month">本月</view>
+    <view class="date-item {{currentPeriod === 'year' ? 'active' : ''}}" bindtap="switchPeriod" data-period="year">本年</view>
+  </view>
+
+  <!-- 总览卡片 -->
+  <view class="summary-card">
+    <view class="summary-row">
+      <view class="summary-item">
+        <text class="summary-label">总支出</text>
+        <text class="summary-value expense">¥{{totalExpense}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="summary-item">
+        <text class="summary-label">总收入</text>
+        <text class="summary-value income">¥{{totalIncome}}</text>
+      </view>
+    </view>
+    <view class="summary-balance">
+      <text class="balance-label">结余</text>
+      <text class="balance-value {{balance >= 0 ? 'positive' : 'negative'}}">¥{{balance}}</text>
+    </view>
+  </view>
+
+  <!-- 支出分类统计 -->
+  <view class="chart-section">
+    <view class="section-title">支出分类</view>
+
+    <!-- 饼图 -->
+    <view class="pie-chart-container">
+      <canvas canvas-id="expenseChart" class="pie-chart"></canvas>
+      <view class="chart-center" wx:if="{{expenseData.length > 0}}">
+        <text class="chart-amount">¥{{totalExpense}}</text>
+        <text class="chart-label">总支出</text>
+      </view>
+      <view class="empty-chart" wx:else>
+        <text class="empty-icon">📊</text>
+        <text class="empty-text">暂无数据</text>
+      </view>
+    </view>
+
+    <!-- 分类列表 -->
+    <view class="category-stats">
+      <view class="category-stat-item" wx:for="{{expenseData}}" wx:key="id">
+        <view class="stat-left">
+          <view class="stat-icon" style="background-color: {{item.color}}">{{item.icon}}</view>
+          <view class="stat-info">
+            <text class="stat-name">{{item.name}}</text>
+            <text class="stat-percent">{{item.percent}}%</text>
+          </view>
+        </view>
+        <view class="stat-right">
+          <text class="stat-amount">¥{{item.amount}}</text>
+          <view class="stat-bar">
+            <view class="stat-bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收入分类统计 -->
+  <view class="chart-section">
+    <view class="section-title">收入分类</view>
+
+    <!-- 饼图 -->
+    <view class="pie-chart-container">
+      <canvas canvas-id="incomeChart" class="pie-chart"></canvas>
+      <view class="chart-center" wx:if="{{incomeData.length > 0}}">
+        <text class="chart-amount">¥{{totalIncome}}</text>
+        <text class="chart-label">总收入</text>
+      </view>
+      <view class="empty-chart" wx:else>
+        <text class="empty-icon">📊</text>
+        <text class="empty-text">暂无数据</text>
+      </view>
+    </view>
+
+    <!-- 分类列表 -->
+    <view class="category-stats">
+      <view class="category-stat-item" wx:for="{{incomeData}}" wx:key="id">
+        <view class="stat-left">
+          <view class="stat-icon" style="background-color: {{item.color}}">{{item.icon}}</view>
+          <view class="stat-info">
+            <text class="stat-name">{{item.name}}</text>
+            <text class="stat-percent">{{item.percent}}%</text>
+          </view>
+        </view>
+        <view class="stat-right">
+          <text class="stat-amount">¥{{item.amount}}</text>
+          <view class="stat-bar">
+            <view class="stat-bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,65 @@
+<view class="container">
+  <!-- 类型切换 -->
+  <view class="type-switch">
+    <view class="type-item {{formData.type === 'expense' ? 'active' : ''}}" bindtap="switchType" data-type="expense">支出</view>
+    <view class="type-item {{formData.type === 'income' ? 'active' : ''}}" bindtap="switchType" data-type="income">收入</view>
+  </view>
+
+  <!-- 金额输入 -->
+  <view class="amount-section">
+    <text class="currency">¥</text>
+    <input
+      class="amount-input"
+      type="digit"
+      placeholder="0.00"
+      value="{{formData.amount}}"
+      bindinput="onAmountInput"
+      focus="{{isFocus}}"
+    />
+  </view>
+
+  <!-- 类别选择 -->
+  <view class="category-section">
+    <view class="section-title">选择类别</view>
+    <view class="category-grid">
+      <view
+        class="category-item {{formData.categoryId === item.id ? 'active' : ''}}"
+        wx:for="{{currentCategories}}"
+        wx:key="id"
+        bindtap="selectCategory"
+        data-id="{{item.id}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注输入 -->
+  <view class="remark-section">
+    <view class="section-title">备注</view>
+    <input
+      class="remark-input"
+      placeholder="写点什么..."
+      value="{{formData.remark}}"
+      bindinput="onRemarkInput"
+    />
+  </view>
+
+  <!-- 日期选择 -->
+  <view class="date-section">
+    <view class="section-title">日期</view>
+    <picker mode="date" value="{{formData.date}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text>{{formData.date || '选择日期'}}</text>
+        <text class="arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="btn-group">
+    <button wx:if="{{editId}}" class="btn btn-danger" bindtap="deleteRecord">删除</button>
+    <button class="btn btn-primary" bindtap="saveRecord">保存</button>
+  </view>
+</view>
